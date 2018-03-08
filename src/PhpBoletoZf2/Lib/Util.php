@@ -1,21 +1,21 @@
 <?php
 
 /**
- * PHP Boleto ZF2 - Versão Beta 
- * 
+ * PHP Boleto ZF2 - Versão Beta
+ *
  * Este arquivo está disponível sob a Licença GPL disponível pela Web
- * em http://pt.wikipedia.org/wiki/GNU_General_Public_License 
+ * em http://pt.wikipedia.org/wiki/GNU_General_Public_License
  * Você deve ter recebido uma cópia da GNU Public License junto com
- * este pacote; se não, escreva para: 
- * 
+ * este pacote; se não, escreva para:
+ *
  * Free Software Foundation, Inc.
  * 59 Temple Place - Suite 330
  * Boston, MA 02111-1307, USA.
- * 
- * Originado do Projeto BoletoPhp: http://www.boletophp.com.br 
- * 
+ *
+ * Originado do Projeto BoletoPhp: http://www.boletophp.com.br
+ *
  * Adaptação ao Zend Framework 2: João G. Zanon Jr. <jot@jot.com.br>
- * 
+ *
  */
 
 namespace PhpBoletoZf2\Lib;
@@ -25,9 +25,9 @@ abstract class Util
 
     /**
      * @author Ramon Soares
-     * 
+     *
      * Calcula o dígito verificaror do Nosso Nümero
-     * 
+     *
      * @param string $numero
      * @return int
      */
@@ -55,40 +55,36 @@ abstract class Util
      *          - número do cliente(convenio) (10 dígitos)
      *          - nosso número (7 dígitos)
      * @param string $constante: constante pra validar
-     * 
-     * @return int $dv valor digito verificador 
+     *
+     * @return int $dv valor digito verificador
      */
-    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr) 
+    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr)
     {
-        $cont      = 0;
-        $calculoDv = '';
 
-        for ($num = 0; $num<=strlen($sequencia); $num++) {
-            for ($posConst=0;$posConst<strlen($constanteStr);$posConst++) {
-                if ($cont==$posConst) {
-                    $constante = $constanteStr[$posConst];
+        $tamanho = strlen($sequencia);
+        /* Constante fixa para Cálculo*/
+        $constanteStr = '319731973197319731973';
 
-                    if ($cont==strlen($constanteStr)-1) {
-                        $cont=0;
-                    } else {                
-                        $cont++;
-                    }    
-                    
-                    break;
-                }
-            }
+        $arrSequencia = str_split($sequencia);
+        $arrConstante = str_split($constanteStr);
+        $soma         = 0;
+        $resto        = 0;
 
-            $calculoDv = $calculoDv + (substr($sequencia,$num,1) * $constante);
+        $digitoVerificador = null;
+
+        for ($x = 0; $x <= $tamanho; $x++) {
+            $soma += ((int)$arrSequencia[$x] * (int)$arrConstante[$x]);
         }
 
-        $resto = $calculoDv % 11;
-        $dv   = 11 - $resto;
+        $resto = $soma % 11;
 
-        if ($dv == 0) $dv = 0;
-        if ($dv == 1) $dv = 0;
-        if ($dv > 9) $dv = 0;
+        if ($resto == 0 || $resto == 1) {
+            $digitoVerificador = 0;
+        } else {
+            $digitoVerificador = 11 - $resto;
+        }
 
-        return $dv;
+        return $digitoVerificador;
     }
 
     /**
@@ -128,8 +124,8 @@ abstract class Util
     }
 
     /**
-     * Converte uma data em número de dias, para composição do fator de vencimento 
-     * 
+     * Converte uma data em número de dias, para composição do fator de vencimento
+     *
      * @param int $ano
      * @param int $mes
      * @param int $dia
@@ -158,7 +154,7 @@ abstract class Util
 
     /**
      * Cálculo de dígito verificador modulo_10
-     * 
+     *
      * @param int $num
      * @return int
      */
@@ -202,19 +198,19 @@ abstract class Util
      *   @autor Pablo Costa <pablo@users.sourceforge.net>
      *
      *   Método:
-     *    Calculo do Modulo 11 para geracao do digito verificador 
-     *    de boletos bancarios conforme documentos obtidos 
-     *    da Febraban - www.febraban.org.br 
-     * 
+     *    Calculo do Modulo 11 para geracao do digito verificador
+     *    de boletos bancarios conforme documentos obtidos
+     *    da Febraban - www.febraban.org.br
+     *
      *   ObservaÁıes:
      *     - Script desenvolvido sem nenhum reaproveitamento de código pré existente.
      *     - Assume-se que a verificação do formato das variáveis de entrada é feita antes da execução deste método.
-     * 
+     *
      * @param type $num string numérica para a qual se deseja calcular o digito verificador;
      * @param type $base valor maximo de multiplicacao [2-$base]
      * @param type $r quando especificado um devolve somente o resto
      * @return int
-     * 
+     *
      */
     public static function modulo11($num, $base = 9, $r = 0, $calcx = 0)
     {
