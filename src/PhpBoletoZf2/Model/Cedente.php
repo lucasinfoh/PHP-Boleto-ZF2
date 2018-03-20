@@ -81,6 +81,18 @@ class Cedente implements CedenteInterface
 
     /**
      *
+     * @var string Endereço (Rua, número, complemento, bairro)
+     */
+    protected $enderecoFormatado;
+
+    /**
+     *
+     * @var string CEP
+     */
+    protected $cep;
+
+    /**
+     *
      * @var string 
      */
     protected $cidade;
@@ -146,7 +158,6 @@ class Cedente implements CedenteInterface
     protected $pontodevenda;
 
 
-
     public function __construct($data = null)
     {
         (new ClassMethods())->hydrate($data, $this);
@@ -195,6 +206,16 @@ class Cedente implements CedenteInterface
     public function getEndereco()
     {
         return $this->endereco;
+    }
+
+    public function getEnderecoFormatado()
+    {
+        return $this->enderecoFormatado;
+    }
+
+    public function getCep()
+    {
+        return $this->cep;
     }
 
     public function getCidade()
@@ -301,6 +322,18 @@ class Cedente implements CedenteInterface
         return $this;
     }
 
+    public function setEnderecoFormatado($enderecoFormatado)
+    {
+        $this->enderecoFormatado = $enderecoFormatado;
+        return $this;
+    }
+
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+        return $this;
+    }
+
     public function setCidade($cidade)
     {
         $this->cidade = $cidade;
@@ -402,9 +435,11 @@ class Cedente implements CedenteInterface
         return $this;
     }
 
+    public function getDescricaoCarteira(){
+        if($this->carteira){
+            return $this->carteira[0] == 1? 'RG' : 'SG';
+        }
 
-
-
-
-
+        return $this->carteira;
+    }
 }
