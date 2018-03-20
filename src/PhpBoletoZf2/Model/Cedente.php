@@ -105,11 +105,6 @@ class Cedente implements CedenteInterface
 
     /**
      *
-     * @var string
-     */
-    protected $tipoRegistro;
-    /**
-     *
      * @var int
      */
     protected $contaCedente;
@@ -233,11 +228,6 @@ class Cedente implements CedenteInterface
         return $this->uf;
     }
 
-    public function getTipoRegistro()
-    {
-        return $this->tipoRegistro;
-    }
-
     public function getContaCedente()
     {
         return $this->contaCedente;
@@ -356,12 +346,6 @@ class Cedente implements CedenteInterface
         return $this;
     }
 
-    public function setTipoRegistro($tipoRegistro)
-    {
-        $this->tipoRegistro = $tipoRegistro;
-        return $this;
-    }
-
     public function setContaCedente($contaCedente)
     {
         $this->contaCedente = $contaCedente;
@@ -451,9 +435,11 @@ class Cedente implements CedenteInterface
         return $this;
     }
 
+    public function getDescricaoCarteira(){
+        if($this->carteira){
+            return $this->carteira[0] == 1? 'RG' : 'SG';
+        }
 
-
-
-
-
+        return $this->carteira;
+    }
 }
