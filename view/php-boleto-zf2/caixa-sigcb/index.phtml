@@ -163,7 +163,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=156 height=13>Agência/Código do Cedente</td>
+        <td class=ct valign=top width=156 height=13>Agência/Código do Beneficiário</td>
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
@@ -841,18 +841,20 @@
         <td class=ct valign=top width=180 height=13>Vencimento</td>
     </tr>
     <tr>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
+        <td class=cp valign=top width=7 height=24>
+            <img height=24
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=472 height=12>Pagável em qualquer Banco até o vencimento</td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
+        <td class=cp valign=top width=472 height=12>
+            PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE
+        </td>
+        <td class=cp valign=top width=7 height=24>
+            <img height=24
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top align=right width=180 height=12>
+        <td class=cp valign=bottom align=right width=180 height=12>
                         <span class="campo">
                             <?php echo ($this->dados->getBoleto()->getDataVencimento())
                                 ? $this->dados->getBoleto()->getDataVencimento()->format("d/m/Y")
@@ -899,7 +901,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=180 height=13>Agência/Código cedente</td>
+        <td class=ct valign=top width=180 height=13>Agência/Código Beneficiário</td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -1431,7 +1433,7 @@
             </table>
         </td>
         <td valign=top width=468 rowspan=5>
-            <font class=ct>Instruções (Texto de responsabilidade do cedente)</font>
+            <font class=ct>Instruções (Texto de responsabilidade do beneficiário)</font>
             <br>
             <br>
                         <span class=cp> <FONT class=campo>
