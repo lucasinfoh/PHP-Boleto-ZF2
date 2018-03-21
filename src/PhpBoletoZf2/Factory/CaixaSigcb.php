@@ -137,11 +137,15 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Formatando os dados bancários do cedente para impressão
          */
-        $this->getCedente()->setAgenciaCodigo(
-            $this->getCedente()->getAgencia()
-            . ' / '
-            . $this->getCedente()->getContaCedente()
+        $contaCedenteDv = Util::modulo11($this->getCedente()->getContaCedente(), 9);
+        $contaCedenteDv = $contaCedenteDv > 9 || $contaCedenteDv == "P" ? 0 : $contaCedenteDv;
+
+        $agenciaCodigo = (
+            $this->getCedente()->getAgencia() . ' / ' .
+            $this->getCedente()->getContaCedente() . '-' . $contaCedenteDv
         );
+ 
+        $this->getCedente()->setAgenciaCodigo($agenciaCodigo);
 
         /**
          * Iniciando opções para criação do Código de Barras
