@@ -84,9 +84,9 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Calcula o dígito verificador do código de barras
          */
-        $this->getCedente()->setContaCedenteDv(
-            Util::digitoVerificadorNossoNumero($this->getCedente()->getContaCedente())
-        );
+        $contaCedenteDv = Util::digitoVerificadorNossoNumero($this->getCedente()->getContaCedente());
+        $contaCedenteDv = $contaCedenteDv == "P" ? "0" : $contaCedenteDv;
+        $this->getCedente()->setContaCedenteDv($contaCedenteDv);
 
         $strNossoNumeroProcessado = str_pad($nossoNumeroProcessado, 15, '0', STR_PAD_LEFT);
         preg_match('/(\d{3})(\d{3})(\d{9})/', $strNossoNumeroProcessado, $arrNossoNumeroProcessado);
