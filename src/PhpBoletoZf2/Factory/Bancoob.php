@@ -1,21 +1,21 @@
 <?php
 
 /**
- * PHP Boleto ZF2 - Versão Beta 
- * 
+ * PHP Boleto ZF2 - Versão Beta
+ *
  * Este arquivo está disponível sob a Licença GPL disponível pela Web
- * em http://pt.wikipedia.org/wiki/GNU_General_Public_License 
+ * em http://pt.wikipedia.org/wiki/GNU_General_Public_License
  * Você deve ter recebido uma cópia da GNU Public License junto com
- * este pacote; se não, escreva para: 
- * 
+ * este pacote; se não, escreva para:
+ *
  * Free Software Foundation, Inc.
  * 59 Temple Place - Suite 330
  * Boston, MA 02111-1307, USA.
- * 
- * Originado do Projeto BoletoPhp: http://www.boletophp.com.br 
- * 
+ *
+ * Originado do Projeto BoletoPhp: http://www.boletophp.com.br
+ *
  * Adaptação ao Zend Framework 2: João G. Zanon Jr. <jot@jot.com.br>
- * 
+ *
  * Matheus Ferreira S. <santana.matheusferreira@gmail.com>
  */
 
@@ -29,45 +29,52 @@
  class Bancoob extends AbstractBoletoFactory
  {
      protected $codigoBanco = '756';
-     
-     public function prepare() 
+
+     public function prepare()
      {
          // adicionando dados das instruções e demonstrativo no boleto
          (new ClassMethods())->hydrate($this->config['php-zf2-boleto']['instrucoes'], $this->getBoleto());
-        
+
          // adicionando valores default de configuração do cedente
-         (new ClassMethods())->hydrate($this->config['php-zf2-boleto'][$this->banco->getCodigoBanco()]['dados_cedente'], $this->getCedente());
-        
+         (new ClassMethods())->hydrate(
+             $this->config['php-zf2-boleto'][$this->banco->getCodigoBanco()]['dados_cedente'],
+             $this->getCedente()
+         );
+
          $nossoNumeroProcessado = (int)$this->getBoleto()->getNossoNumero();
-         $nossoNumeroProcessado = \str_pad($nossoNumeroProcessado, 7, '0', STR_PAD_LEFT);
+         $nossoNumeroProcessado = str_pad($nossoNumeroProcessado, 7, '0', STR_PAD_LEFT);
 
          // Calcula o fator do vencimento (número inteiro que representa a data de vencimento na linha digitavel)
          $fatorVencimento = Util::fatorVencimento($this->getBoleto()->getDataVencimento()->format("d/m/Y"));
-         $fatorVencimento = \str_pad($fatorVencimento, 4, '0', STR_PAD_LEFT);
+         $fatorVencimento = str_pad($fatorVencimento, 4, '0', STR_PAD_LEFT);
 
          // Processando o valor para aplicação na linha digitável e no código de barras
-         $valor           = preg_replace("/[^0-9]/", "", $this->getBoleto()->getValor()); // removendo formatação do número
-         $valorProcessado = \str_pad($valor, 10, '0', STR_PAD_LEFT);
+         // removendo formatação do número
+         $valor           = preg_replace("/[^0-9]/", "", $this->getBoleto()->getValor());
+         $valorProcessado = str_pad($valor, 10, '0', STR_PAD_LEFT);
 
          $parcela = $this->getBoleto()->getQuantidade();
-         $parcela = \str_pad(($parcela ? $parcela: 1), 3, '0', STR_PAD_LEFT);
+         $parcela = str_pad(($parcela ? $parcela : 1), 3, '0', STR_PAD_LEFT);
 
          $numeroCliente = (int)$this->getCedente()->getConvenio();
-         $numeroCliente = \str_pad($numeroCliente, 7, '0', STR_PAD_LEFT);
+         $numeroCliente = str_pad($numeroCliente, 10, '0', STR_PAD_LEFT);
+
+         $numeroCooperativa = (int)$this->getCedente()->getAgencia();
+         $numeroCooperativa = str_pad($numeroCooperativa, 4, '0', STR_PAD_LEFT);
 
 
-         /** 
+         /**
           * Calcula digito verificador nosso número boletos Bancoob
           * 3197 regra sicoob
           */
-         $sequencia     = ($this->getCedente()->getAgencia() . \str_pad($numeroCliente, 10, '0', STR_PAD_LEFT) . $nossoNumeroProcessado);      
+         $sequencia     = ($numeroCooperativa . $numeroCliente . $nossoNumeroProcessado);
          $dvNossoNumero = Util::digitoVerificadorNossoNumeroBancoob($sequencia, '3197');
 
-         $nossoNumeroFormatado = "$nossoNumeroProcessado$dvNossoNumero";
+         $nossoNumeroFormatado = $nossoNumeroProcessado . $dvNossoNumero;
 
          // modalidade de cobranca
          $variacao = $this->getCedente()->getVariacaoCarteira();
-         $variacao = \str_pad(($variacao?$variacao: 2), 2, '0', STR_PAD_LEFT);
+         $variacao = str_pad(($variacao?$variacao: 2), 2, '0', STR_PAD_LEFT);
 
          $campoLivre = "$variacao$numeroCliente$nossoNumeroFormatado$parcela";
 

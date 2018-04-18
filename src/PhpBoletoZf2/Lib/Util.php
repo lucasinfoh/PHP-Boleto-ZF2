@@ -60,7 +60,6 @@ abstract class Util
      */
     public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr)
     {
-
         $tamanho = strlen($sequencia);
         /* Constante fixa para Cálculo*/
         $constanteStr = '319731973197319731973';
