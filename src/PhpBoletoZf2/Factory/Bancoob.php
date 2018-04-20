@@ -57,6 +57,7 @@
          $parcela = str_pad(($parcela ? $parcela : 1), 3, '0', STR_PAD_LEFT);
 
          $numeroCliente = (int)$this->getCedente()->getConvenio();
+         $numeroCliente7 = str_pad($numeroCliente, 7, '0', STR_PAD_LEFT);
          $numeroCliente = str_pad($numeroCliente, 10, '0', STR_PAD_LEFT);
 
          $numeroCooperativa = (int)$this->getCedente()->getAgencia();
@@ -73,10 +74,12 @@
          $nossoNumeroFormatado = $nossoNumeroProcessado . $dvNossoNumero;
 
          // modalidade de cobranca
+         $carteira = $this->getCedente()->getCarteira();
+         $carteira = ($carteira?$carteira: 1);
          $variacao = $this->getCedente()->getVariacaoCarteira();
          $variacao = str_pad(($variacao?$variacao: 2), 2, '0', STR_PAD_LEFT);
 
-         $campoLivre = "$variacao$numeroCliente$nossoNumeroFormatado$parcela";
+         $campoLivre = "$carteira$numeroCooperativa$variacao$numeroCliente7$nossoNumeroFormatado$parcela";
 
          // Calcula o dígito verificador do código de barras
          $DV = Util::digitoVerificadorBarra(
@@ -84,8 +87,6 @@
                 . $this->getBanco()->getMoeda()
                 . $fatorVencimento
                 . $valorProcessado
-                . $this->getBanco()->getCarteira()
-                . $this->getCedente()->getAgencia()
                 . $campoLivre
          );
 
@@ -97,8 +98,6 @@
                 . $DV
                 . $fatorVencimento
                 . $valorProcessado
-                . $this->getBanco()->getCarteira()
-                . $this->getCedente()->getAgencia()
                 . $campoLivre
                 ;
 
