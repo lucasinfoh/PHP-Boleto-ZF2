@@ -214,15 +214,18 @@ abstract class Util
     {
         $soma = 0;
         $fator = 2;
+
         for ($i = strlen($num); $i > 0; $i--) {
             $numeros[$i] = substr($num, $i - 1, 1);
             $parcial[$i] = $numeros[$i] * $fator;
             $soma += $parcial[$i];
+
             if ($fator == $base) {
                 $fator = 1;
             }
             $fator++;
         }
+
         if ($r == 0) {
             $soma *= 10;
             $digito = $soma % 11;
@@ -240,6 +243,7 @@ abstract class Util
         } elseif ($r == 2) {
         	$resto = $soma % 11;
         	$res = 11-$resto;
+
         	if (in_array($res,array(0,10,11)))
         		$res = 1;
         	return $res;

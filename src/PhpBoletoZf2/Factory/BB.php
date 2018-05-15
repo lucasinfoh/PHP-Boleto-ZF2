@@ -1,21 +1,21 @@
 <?php
 
 /**
- * PHP Boleto ZF2 - Versão Beta 
- * 
+ * PHP Boleto ZF2 - Versão Beta
+ *
  * Este arquivo está disponível sob a Licença GPL disponível pela Web
- * em http://pt.wikipedia.org/wiki/GNU_General_Public_License 
+ * em http://pt.wikipedia.org/wiki/GNU_General_Public_License
  * Você deve ter recebido uma cópia da GNU Public License junto com
- * este pacote; se não, escreva para: 
- * 
+ * este pacote; se não, escreva para:
+ *
  * Free Software Foundation, Inc.
  * 59 Temple Place - Suite 330
  * Boston, MA 02111-1307, USA.
- * 
- * Originado do Projeto BoletoPhp: http://www.boletophp.com.br 
- * 
+ *
+ * Originado do Projeto BoletoPhp: http://www.boletophp.com.br
+ *
  * Adaptação ao Zend Framework 2: João G. Zanon Jr. <jot@jot.com.br>
- * 
+ *
  */
 
 namespace PhpBoletoZf2\Factory;
@@ -27,12 +27,12 @@ use Zend\Barcode\Barcode;
 
 class BB extends AbstractBoletoFactory
 {
-    
+
     protected $codigoBanco = '001';
 
     public function prepare()
     {
-        
+
         /**
          * adicionando dados das instruções e demonstrativo no boleto
          */
@@ -46,20 +46,29 @@ class BB extends AbstractBoletoFactory
         /**
          * Processando o valor para aplicação na linha digitável e no código de barras
          */
-        $valor = preg_replace("/[^0-9]/", "", $this->getBoleto()->getValor()); // removendo formatação do número
+        $valor           = preg_replace(
+            "/[^0-9]/",
+            "",
+            $this->getBoleto()->getValor()
+        ); // removendo formatação do número
         $valorProcessado = \str_pad($valor, 10, '0', STR_PAD_LEFT);
-
+        $carteira        = \str_pad($this->getBanco()->getCarteira(), 2, '0', STR_PAD_LEFT);
+        $agencia         = \str_pad($this->getCedente()->getAgencia(), 4, '0', STR_PAD_LEFT);
+        $conta           = \str_pad($this->getCedente()->getContaCorrente(), 8, '0', STR_PAD_LEFT);
+        $banco           = \str_pad($this->getBanco()->getCodigoBanco(), 3, '0', STR_PAD_LEFT);
+        $moeda           = $this->getBanco()->getMoeda();
 
         /**
          * Formatando os dados bancários do cedente para impressão
          */
-        $this->getCedente()->setAgenciaCodigo($this->getCedente()->getAgencia()
-                . '-'
-                . $this->getCedente()->getAgenciaDv()
-                . ' / '
-                . $this->getCedente()->getContaCorrente()
-                . '-'
-                . $this->getCedente()->getContaCorrenteDv()
+        $this->getCedente()->setAgenciaCodigo(
+            $this->getCedente()->getAgencia()
+            . '-'
+            . $this->getCedente()->getAgenciaDv()
+            . ' / '
+            . $this->getCedente()->getContaCorrente()
+            . '-'
+            . $this->getCedente()->getContaCorrenteDv()
         );
 
         // usado quando convenio tem 7 digitos
@@ -67,55 +76,55 @@ class BB extends AbstractBoletoFactory
 
         switch ($this->getCedente()->getFormatacaoConvenio()) {
             case 8 :
-                $convenioProcessado = str_pad($this->getCedente()->getConvenio(), 8, '0', STR_PAD_LEFT);
+                $convenioProcessado    = str_pad($this->getCedente()->getConvenio(), 8, '0', STR_PAD_LEFT);
                 $nossoNumeroProcessado = str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT);
 
-                $DV = Util::modulo11($this->getBanco()->getCodigoBanco()
-                                . $this->getBanco()->getMoeda()
-                                . $fatorVencimento
-                                . $valorProcessado
-                                . $livreZeros
-                                . $convenioProcessado
-                                . $nossoNumeroProcessado
-                                . $this->getBanco()->getCarteira(),9,2
+                $DV = Util::modulo11(
+                    $banco
+                    . $moeda
+                    . $fatorVencimento
+                    . $valorProcessado
+                    . $livreZeros
+                    . $convenioProcessado
+                    . $nossoNumeroProcessado
+                    . $carteira,
+                    9,
+                    2
                 );
 
-                $strLinha = $this->getBanco()->getCodigoBanco()
-                        . $this->getBanco()->getMoeda()
-                        . $DV
-                        . $fatorVencimento
-                        . $valorProcessado
-                        . $livreZeros
-                        . $convenioProcessado
-                        . $nossoNumeroProcessado
-                        . $this->getBanco()->getCarteira();
+                $strLinha = $banco
+                    . $moeda
+                    . $DV
+                    . $fatorVencimento
+                    . $valorProcessado
+                    . $livreZeros
+                    . $convenioProcessado
+                    . $nossoNumeroProcessado
+                    . $this->getBanco()->getCarteira();
 
-                $nossoNumeroFormatado = $convenioProcessado . $nossoNumeroProcessado . '-' . Util::modulo11($convenioProcessado . $nossoNumeroProcessado);
+                $nossoNumeroFormatado = $convenioProcessado . $nossoNumeroProcessado . '-' . Util::modulo11(
+                        $convenioProcessado . $nossoNumeroProcessado
+                    );
 
-                break;
-                ;
+                break;;
             case 7 :
-                $convenioProcessado = str_pad($this->getCedente()->getConvenio(), 7, '0', STR_PAD_LEFT);
+                $convenioProcessado    = str_pad($this->getCedente()->getConvenio(), 7, '0', STR_PAD_LEFT);
                 $nossoNumeroProcessado = str_pad($this->getBoleto()->getNossoNumero(), 10, '0', STR_PAD_LEFT);
 
-                $DV = Util::modulo11($this->getBanco()->getCodigoBanco()
-                                . $this->getBanco()->getMoeda()
-                                . $fatorVencimento
-                                . $valorProcessado
-                                . $livreZeros
-                                . $convenioProcessado
-                                . $nossoNumeroProcessado
-                                . $this->getBanco()->getCarteira(),9,2
+                $dadosDv = (
+                    $banco . $moeda . $fatorVencimento . $valorProcessado . $livreZeros . $convenioProcessado . $nossoNumeroProcessado . $carteira
                 );
-                $strLinha = $this->getBanco()->getCodigoBanco()
-                        . $this->getBanco()->getMoeda()
-                        . $DV
-                        . $fatorVencimento
-                        . $valorProcessado
-                        . $livreZeros
-                        . $convenioProcessado
-                        . $nossoNumeroProcessado
-                        . $this->getBanco()->getCarteira();
+                $DV      = Util::modulo11($dadosDv, 9, 2);
+
+                $strLinha = $banco
+                    . $moeda
+                    . $DV
+                    . $fatorVencimento
+                    . $valorProcessado
+                    . $livreZeros
+                    . $convenioProcessado
+                    . $nossoNumeroProcessado
+                    . $carteira;
 
                 $nossoNumeroFormatado = $convenioProcessado . $nossoNumeroProcessado;
 
@@ -126,51 +135,60 @@ class BB extends AbstractBoletoFactory
                 switch ($this->getBoleto()->getFormatacaoNossoNumero()) {
                     case 1 :
                         $nossoNumeroProcessado = str_pad($this->getBoleto()->getNossoNumero(), 5, '0', STR_PAD_LEFT);
-                        $DV = Util::modulo11($this->getBanco()->getCodigoBanco()
-                                        . $this->getBanco()->getMoeda()
-                                        . $fatorVencimento
-                                        . $valorProcessado
-                                        . $convenioProcessado
-                                        . $nossoNumeroProcessado
-                                        . $this->getCedente()->getAgencia()
-                                        . $this->getCedente()->getContaCorrente()
-                                        . $this->getCedente()->getCarteira(),9,2
+                        $DV                    = Util::modulo11(
+                            $banco
+                            . $moeda
+                            . $fatorVencimento
+                            . $valorProcessado
+                            . $convenioProcessado
+                            . $nossoNumeroProcessado
+                            . $agencia
+                            . $conta
+                            . $carteira,
+                            9,
+                            2
                         );
 
-                        $strLinha = $this->getBanco()->getCodigoBanco()
-                                . $this->getBanco()->getMoeda()
-                                . $DV
-                                . $fatorVencimento
-                                . $valorProcessado
-                                . $convenioProcessado
-                                . $nossoNumeroProcessado
-                                . $this->getCedente()->getAgencia()
-                                . $this->getCedente()->getContaCorrente()
-                                . $this->getCedente()->getCarteira();
+                        $strLinha = $banco
+                            . $moeda
+                            . $DV
+                            . $fatorVencimento
+                            . $valorProcessado
+                            . $convenioProcessado
+                            . $nossoNumeroProcessado
+                            . $agencia
+                            . $conta
+                            . $carteira;
 
-                        $nossoNumeroFormatado = $convenioProcessado . $nossoNumeroProcessado . '-' . Util::modulo11($convenioProcessado . $nossoNumeroProcessado);
+                        $nossoNumeroFormatado =
+                            $convenioProcessado
+                            . $nossoNumeroProcessado
+                            . '-'
+                            . Util::modulo11($convenioProcessado . $nossoNumeroProcessado);
                         break;
                     case 2 :
-                        $numeroServico = 21;
+                        $numeroServico         = 21;
                         $nossoNumeroProcessado = str_pad($this->getBoleto()->getNossoNumero(), 17, '0', STR_PAD_LEFT);
-                        $DV = Util::modulo11(
-                                        $this->getBanco()->getCodigoBanco()
-                                        . $this->getBanco()->getMoeda()
-                                        . $fatorVencimento
-                                        . $valorProcessado
-                                        . $convenioProcessado
-                                        . $nossoNumeroProcessado
-                                        . $numeroServico,9,2
+                        $DV                    = Util::modulo11(
+                            $banco
+                            . $moeda
+                            . $fatorVencimento
+                            . $valorProcessado
+                            . $convenioProcessado
+                            . $nossoNumeroProcessado
+                            . $numeroServico,
+                            9,
+                            2
                         );
 
-                        $strLinha = $this->getBanco()->getCodigoBanco()
-                                . $this->getBanco()->getMoeda()
-                                . $DV
-                                . $fatorVencimento
-                                . $valorProcessado
-                                . $convenioProcessado
-                                . $nossoNumeroProcessado
-                                . $numeroServico;
+                        $strLinha = $banco
+                            . $moeda
+                            . $DV
+                            . $fatorVencimento
+                            . $valorProcessado
+                            . $convenioProcessado
+                            . $nossoNumeroProcessado
+                            . $numeroServico;
 
                         $nossoNumeroFormatado = $nossoNumeroProcessado;
                         break;
@@ -187,15 +205,20 @@ class BB extends AbstractBoletoFactory
         /**
          * Criando o código de barras em uma imagem e retornando seu base64
          */
-        $codigoDeBarras = Barcode::factory('Code25interleaved', 'PhpBoletoZf2\Lib\Barcode\Renderer\Base64', $barcodeOptions, array());
+        $codigoDeBarras = Barcode::factory(
+            'Code25interleaved',
+            'PhpBoletoZf2\Lib\Barcode\Renderer\Base64',
+            $barcodeOptions,
+            array()
+        );
 
         /**
          * Termina de hidratar o objetodo boleto
          */
         $this->getBoleto()
-                ->setCodigoDeBarras($codigoDeBarras)
-                ->setLinhaDigitavel(Util::montaLinhaDigitavel($strLinha))
-                ->setNossoNumeroFormatado($nossoNumeroFormatado);
+            ->setCodigoDeBarras($codigoDeBarras)
+            ->setLinhaDigitavel(Util::montaLinhaDigitavel($strLinha))
+            ->setNossoNumeroFormatado($nossoNumeroFormatado);
 
         return $this;
     }
