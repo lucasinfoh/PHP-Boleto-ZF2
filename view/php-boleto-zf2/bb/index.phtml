@@ -543,7 +543,7 @@
                         echo $this->dados->getSacado()->getNome();
                         echo ' - ';
                         echo $documento . $this->dados->getSacado()->getDocumento();
-                        echo ' - ';
+                        echo '<br>';
                         echo $this->dados->getSacado()->getEndereco1();
                         echo ' - ';
                         echo $this->dados->getSacado()->getEndereco2();
@@ -551,11 +551,16 @@
                     </p>
                 </td>
             </tr>
-            <tr class="campos">
-                <td class="sacado2">&nbsp;</td>
-            </tr>
+            </tbody>
+        </table>
+
+        <table class="line" cellspacing="0" cellpadding="0" width="666px">
+            <tbody>
             <tr class="titulos">
                 <td class="sacado2">Sacador/Avalista</td>
+            </tr>
+            <tr class="campos">
+                <td class="sacado2">&nbsp;</td>
             </tr>
             </tbody>
         </table>
@@ -592,7 +597,7 @@
             <tr class="campos">
                 <td class="sacado2">
                     <?php echo $this->dados->getCedente()->getNomeCedente() ?> -
-                    <?php echo $this->dados->getCedente()->getDocumento() ?> -
+                    <?php echo $this->dados->getCedente()->getDocumento() ?><br>
                     <?php echo $this->dados->getCedente()->getEndereco() ?> -
                     <?php echo $this->dados->getCedente()->getCidade() . ' - ' . $this->dados->getCedente()->getUf() ?>
                 </td>
@@ -711,12 +716,6 @@
                 <td class="reservado">&nbsp;</td>
                 <td class="carteira">
                     <?php echo $this->dados->getCedente()->getCarteira() ?>
-                    <?php echo(
-                    $this->dados->getCedente()->getVariacaoCarteira() ?
-                        $this->dados->getCedente()->getVariacaoCarteira() :
-                        '&nbsp;'
-                    )
-                    ?>
                 </td>
                 <td class="especie2"><?php echo $this->dados->getBanco()->getEspecie() ?></td>
                 <td class="qtd2"><?php echo $this->dados->getBoleto()->getQuantidade() ?></td>
