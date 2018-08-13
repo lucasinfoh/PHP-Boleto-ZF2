@@ -275,7 +275,7 @@ abstract class AbstractBoleto implements BoletoInterface
             case 'base64' :
                 $base64 = new ImageText(
                     [
-                        'width'  => 410,
+                        'width'  => 450,
                         'height' => 30,
                         'text'   => $this->linhaDigitavel
                     ]
