@@ -110,6 +110,10 @@
                 border-bottom: 2px navy solid;
             }
 
+            table.header td {
+                vertical-align: bottom;
+            }
+
             table.header div.field_cod_banco {
                 width: 46px;
                 height: 19px;
@@ -505,7 +509,7 @@
             <tbody>
             <tr>
                 <td width="150px"><img src="<?php echo $this->dados->getBanco()->getLogoBanco() ?>"/></td>
-                <td width="50px" style="vertical-align: bottom;">
+                <td width="50px">
                     <div class="field_cod_banco"><?php
                         echo $this->dados->getBanco()->getCodigoBanco();
                         echo '-';
@@ -629,7 +633,7 @@
             <tbody>
             <tr>
                 <td width="150px"><img src="<?php echo $this->dados->getBanco()->getLogoBanco() ?>"/></td>
-                <td width="50px" style="vertical-align: bottom;">
+                <td width="50px">
                     <div class="field_cod_banco">
                         <?php
                         echo $this->dados->getBanco()->getCodigoBanco();
