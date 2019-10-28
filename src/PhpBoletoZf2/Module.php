@@ -39,6 +39,7 @@ class Module
                 'Boleto\Itau'       => 'PhpBoletoZf2\Factory\Itau',
                 'Boleto\santander'  => 'PhpBoletoZf2\Factory\Santander',
                 'Boleto\Bancoob'    => 'PhpBoletoZf2\Factory\Bancoob',
+                'Boleto\Safra'    => 'PhpBoletoZf2\Factory\Safra',
             )
         );
     }
