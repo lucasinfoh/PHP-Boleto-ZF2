@@ -37,6 +37,7 @@ class Banco implements BancoInterface
     const CODIGO_SANTANDER       = '033';
     const CODIGO_SICREDI         = '748';
     const CODIGO_SUDAMERIS       = '215';
+    const CODIGO_SAFRA           = '422';
 
     protected $bancos = [
         self::CODIGO_BANCO_DO_BRASIL => [
@@ -142,6 +143,16 @@ class Banco implements BancoInterface
         self::CODIGO_SUDAMERIS => [
             'codigoBanco' => self::CODIGO_SUDAMERIS,
             'nomeBanco' => 'Banco Comercial de Investimentos Sudameris S.A.',
+            'logoBanco' => '',
+            'carteira' => '',
+            'aceite' => '',
+            'moeda' => 9,
+            'especie' => 'R$',
+            'especieDoc' => 'DM'
+        ],
+        self::CODIGO_SAFRA => [
+            'codigoBanco' => self::CODIGO_SAFRA,
+            'nomeBanco' => 'Banco Safra S.A.',
             'logoBanco' => '',
             'carteira' => '',
             'aceite' => '',
