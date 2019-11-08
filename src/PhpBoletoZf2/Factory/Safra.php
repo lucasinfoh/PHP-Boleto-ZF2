@@ -25,9 +25,9 @@ use Zend\Barcode\Barcode;
 use PhpBoletoZf2\Factory\AbstractBoletoFactory;
 use PhpBoletoZf2\Lib\Util;
 
-class CaixaSigcb extends AbstractBoletoFactory
+class Safra extends AbstractBoletoFactory
 {
-    protected $codigoBanco = '104';
+    protected $codigoBanco = '422';
 
     /**
      * @return string
@@ -39,7 +39,7 @@ class CaixaSigcb extends AbstractBoletoFactory
 
     /**
      * @param string $codigoBanco
-     * @return CaixaSigcb
+     * @return Safra
      */
     public function setCodigoBanco($codigoBanco)
     {

@@ -8,7 +8,7 @@
     <meta name="Generator" content="Projeto BoletoPHP - www.boletophp.com.br - Licença GPL"/>
     <style type=text/css>
         .cp {
-            font: bold 10px Arial;
+            font: 10px Arial;
             color: black
         }
 
@@ -22,8 +22,8 @@
         }
 
         .ct {
-            FONT: 9px "Arial Narrow";
-            COLOR: #000033
+            FONT: bold 9px "Arial Narrow";
+            COLOR: #000000
         }
 
         .cn {
@@ -36,8 +36,16 @@
             color: #000000
         }
 
+        td[align='right'] {
+            padding-right: 1px;
+        }
+
+        .sem-espacamento {
+            line-height: 0px;
+        }
+
         @media print {
-            .no-print{
+            .no-print {
                 display: none;
             }
         }
@@ -45,117 +53,30 @@
 </head>
 
 <body text=#000000 bgColor=#ffffff topMargin=0 rightMargin=0>
-<table width=666 cellspacing=0 cellpadding=0 border=0 class="no-print">
-    <tr>
-        <td valign=top class=cp>
-            <div align="center">Instruções de Impressão</div>
-        </td>
-    </tr>
-    <tr>
-        <td valign=top class=cp>
-            <div align="left"><p>
-                    Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo
-                    econômico).<br>
-                    Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do
-                    formulário.<br>
-                    Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o Código de
-                    barras.<br>
-                    Caso não apareça o Código de barras no final, clique em F5 para atualizar esta tela.
-                    Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou
-                    no internet banking:<br>
-                    <br>
-                            <span class="ld2">&nbsp;&nbsp;&nbsp;&nbsp;Linha Digitável: &nbsp;<img
-                                    src="<?php echo $this->dados->getBoleto()->getLinhaDigitavel('base64')->render() ?>"/><br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;Valor: &nbsp;&nbsp;R$ <?php echo number_format($this->dados->getBoleto()->getValor() / 100, 2, ',', '.') ?>
-                                <br>
-                            </span>
-            </div>
-        </td>
-    </tr>
-</table>
-<br>
 <table cellspacing=0 cellpadding=0 width=666 border=0>
     <tbody>
     <tr>
-        <td class=ct width=666>
-            <img height=1
-                 src=data:ïmage/png;base64,iVBORw0KGgoAAAANSUhEUgAAApkAAAACAQAAAAA76vpWAAAAGUlEQVR42mNgbDiQYCDBw8ZMPUYDAy0MBQCvGyXfT4/GUQAAAABJRU5ErkJggg==
-                 width="665" border="0">
+        <td class=cp width=300 style="font: bold 14px Arial;">
+            <?php echo $this->dados->getBanco()->getNomeBanco() ?>
         </td>
-    </tr>
-    <tr>
-        <td class=ct width=666>
-            <div align=right>
-                <b class=cp>Recibo do Pagador</b>
-            </div>
+        <td class=cp width=70 align="right" style="font: bold 10px Arial;">
+            Recibo do Pagador
         </td>
     </tr>
     </tbody>
 </table>
-<table width=666 cellspacing=5 cellpadding=0 border=0>
-    <tr>
-        <td width=41>
-        </td>
-    </tr>
-</table>
-<table width=666 cellspacing=5 cellpadding=0 border=0 align=Default>
-    <tr>
-        <td width=41>
-            <img src="<?php echo $this->dados->getCedente()->getLogoCedente() ?>"
-                 style="max-width: 200px;max-height: 60px;"/>
-        </td>
-        <td class=ti
-            width=455><?php echo $this->dados->getCedente()->getIdentificacao(); ?> <?php echo ($this->dados->getCedente()->getDocumento())
-                ? "<br>" . $this->dados->getCedente()->getDocumento() : '' ?>
-            <br>
-        </td>
-        <td align=RIGHT width=150 class=ti>&nbsp;</td>
-    </tr>
-</table>
-<BR>
-<table cellspacing=0 cellpadding=0 width=666 border=0>
-    <tr>
-        <td class=cp width=150>
-                    <span class="campo">
-                        <IMG src="<?php echo $this->dados->getBanco()->getLogoBanco() ?>" width="150" height="40"
-                             border=0>
-                    </span>
-        </td>
-        <td width=3 valign=bottom>
-            <img height=22
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAATAQMAAACA8k5ZAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=2 border=0>
-        </td>
-        <td class=cpt width=58 valign=bottom>
-            <div align=center>
-                <font class=bc>
-                    <?php echo $this->dados->getBanco()->getCodigoBanco(), '-', $this->dados->getBanco()->getCodigoBancoDv() ?>
-                </font>
-            </div>
-        </td>
-        <td width=3 valign=bottom>
-            <img height=22
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAATAQMAAACA8k5ZAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=2 border=0>
-        </td>
-        <td class=ld align=right width=453 valign=bottom>
-                    <span class=ld> 
-                        <span class="campotitulo">
-                            <img src="<?php echo $this->dados->getBoleto()->getLinhaDigitavel('base64')->render() ?>"/>
-                        </span>
-                    </span>
-        </td>
-    </tr>
-    <tbody>
-    <tr>
-        <td colspan=5>
-            <img height=2
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=666 border=0>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+<tbody>
+<tr>
+    <td colspan="5">
+        <img height="1"
+             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg=="
+             width="666" border="0">
+    </td>
+</tr>
+</tbody>
+
+
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -164,31 +85,30 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=268 height=13>Beneficiário</td>
+
+        <td class=ct valign=top width=324 height=13>Beneficiário</td>
+
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=156 height=13>Agência/Código do Beneficiário</td>
+
+        <td class=ct valign=top align="center" width=160 height=13>Nosso Número</td>
+
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=34 height=13>Espécie</td>
+
+        <td class=ct valign=top width=160 height=13>Vencimento</td>
+
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=53 height=13>Quantidade</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=120 height=13>Nosso número</td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -196,107 +116,81 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=268 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getNomeCedente(); ?>
-                        </span>
+
+        <td class=cp valign=top width=324 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getCedente()->getNomeCedente(); ?>
+            </span>
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=156 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getAgenciaCodigo() ?>
-                        </span>
+
+        <td class=cp valign=top align="center" width=160 height=12>
+            <span class="campo">
+                <?php echo str_pad($this->dados->getBoleto()->getNossoNumero(),9,0,STR_PAD_LEFT) ?>
+            </span>
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=34 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getBanco()->getEspecie() ?>
-                        </span>
+
+        <td class=cp valign=top align="center" width=160 height=12>
+            <span class="campo">
+                <?php echo ($this->dados->getBoleto()->getDataVencimento())
+                    ? $this->dados->getBoleto()->getDataVencimento()->format("d/m/Y")
+                    : "Contra Apresentação" ?>
+            </span>
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
-        </td>
-        <td class=cp valign=top width=53 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getBoleto()->getQuantidade() ?>
-                        </span>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=120 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getBoleto()->getNossoNumeroFormatado() ?>
-                        </span>
         </td>
     </tr>
+
     <tr>
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=268 height=1>
+        <td valign=top width=324 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=268 border=0>
+                 width=324 border=0>
         </td>
+
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=156 height=1>
+        <td valign=top width=160 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=156 border=0>
+                 width=160 border=0>
         </td>
+
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=34 height=1>
+        <td valign=top width=160 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=34 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=53 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=53 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=120 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=120 border=0>
+                 width=160 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!--ENDEREÇO-->
+
+
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -305,32 +199,59 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top colspan=3 height=13>Endereço</td>
+
+        <td class=ct valign=top width=100 height=13>Data do Docto</td>
 
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=7 height=13>UF</td>
+
+        <td class=ct valign=top align="center" width=110 height=13>Número do Documento</td>
 
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=7 height=13>CEP</td>
+
+        <td class=ct valign=top align="center" width=100 height=13>Carteira</td>
+
+        <td class=ct valign=top width=7 height=13>
+            <img height=13
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=ct valign=top align="center" width=160 height=13>Agência/Código Beneficiário</td>
+
+        <td class=ct valign=top width=7 height=13>
+            <img height=13
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=ct valign=top width=160 height=13>Valor</td>
+
+        <td class=ct valign=top width=7 height=13>
+            <img height=13
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
     </tr>
+
     <tr>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top colspan=3 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getEnderecoFormatado() ?>
-                        </span>
+
+        <td class=cp valign=top width="100" height=12>
+            <span class="campo">
+                <?php echo $this->dados->getBoleto()->getDataDocumento()->format("d/m/Y") ?>
+            </span>
         </td>
 
         <td class=cp valign=top width=7 height=12>
@@ -338,10 +259,11 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=20 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getUf() ?>
-                        </span>
+
+        <td class=cp valign=top align="center" width=110 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getBoleto()->getNumeroDocumento() ?>
+            </span>
         </td>
 
         <td class=cp valign=top width=7 height=12>
@@ -349,311 +271,102 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top align=right width=103 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getCep() ?>
-                        </span>
+
+        <td class=cp valign=top align="center" width=100 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getCedente()->getCarteira() ?>
+            </span>
+        </td>
+
+        <td class=cp valign=top width=7 height=12>
+            <img height=12
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=cp valign=top align=center width=160 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getCedente()->getAgencia().' / '.$this->dados->getCedente()->getContaCedente() ?>
+            </span>
+        </td>
+
+        <td class=cp valign=top width=7 height=12>
+            <img height=12
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=cp valign=top align=center width=160 height=12>
+            <span class="campo">
+                <?php echo number_format($this->dados->getBoleto()->getValor() / 100, 2, ",", ".") ?>
+            </span>
+        </td>
+
+
+        <td class=cp valign=top width=7 height=12>
+            <img height=12
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
         </td>
     </tr>
+
     <tr>
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=185 height=1>
+        <td valign=top width=100 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=290 border=0>
+                 width=100 border=0>
         </td>
-
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=132 height=1>
+        <td valign=top width=110 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=134 border=0>
+                 width=110 border=0>
         </td>
-
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=20 height=1>
+        <td valign=top width=100 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=34 border=0>
+                 width=100 border=0>
         </td>
-
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=180 height=1>
+        <td valign=top width=160 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
+                 width=160 border=0>
+        </td>
+        <td valign=top width=7 height=1>
+            <img height=1
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
+                 width=7 border=0>
+        </td>
+        <td valign=top width=160 height=1>
+            <img height=1
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
+                 width=160 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!-- FIM ENDEREÇO -->
-<table cellspacing=0 cellpadding=0 border=0>
-    <tbody>
-    <tr>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top colspan=3 height=13>Número do documento</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=132 height=13>CPF/CNPJ</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=134 height=13>Vencimento</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=180 height=13>Valor documento</td>
-    </tr>
-    <tr>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top colspan=3 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getBoleto()->getNumeroDocumento() ?>
-                        </span>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top width=132 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getDocumento() ?>
-                        </span>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top width=134 height=12>
-                        <span class="campo">
-                            <?php echo ($this->dados->getBoleto()->getDataVencimento())
-                                ? $this->dados->getBoleto()->getDataVencimento()->format('d/m/Y')
-                                : "Contra Apresentação" ?>
-                        </span>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=180 height=12>
-                        <span class="campo">
-                            <?php echo number_format($this->dados->getBoleto()->getValor() / 100, 2, ",", ".") ?>
-                        </span>
-        </td>
-    </tr>
-    <tr>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=113 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=113 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=72 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=72 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=132 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=132 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=134 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=134 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=180 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<table cellspacing=0 cellpadding=0 border=0>
-    <tbody>
-    <tr>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=113 height=13>(-) Desconto / Abatimentos</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=112 height=13>(-) Outras deduções</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=113 height=13>(+) Mora / Multa</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=113 height=13>(+) Outros acréscimos</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=180 height=13>(=) Valor cobrado</td>
-    </tr>
-    <tr>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=113 height=12>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=112 height=12>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=113 height=12>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=113 height=12>
-        </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=180 height=12>
-        </td>
-    </tr>
-    <tr>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=113 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=113 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=112 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=112 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=113 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=113 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=113 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=113 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=180 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+
+<!--PAGADOR-->
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -662,70 +375,92 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=659 height=13>Pagador</td>
-    </tr>
-    <tr>
-        <td class=cp valign=top width=7 height=33>
-            <img height=33
+
+        <td class=ct valign=top width=658 height=13>Pagador</td>
+
+        <td class=ct valign=top width=7 height=12>
+            <img height=15
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=659 height=12>
+    </tr>
+
+    <tr>
+        <td class=cp valign=top width=7 height=15>
+            <img height=15
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=cp valign=top width=658 height=15>
             <span class="campo">
-                <?php
-                if ($this->dados->getSacado()->getDocumento()) {
-                    $l = preg_replace("/[^\d]/", "", $this->dados->getSacado()->getDocumento());
-                    if (strlen($l) == 11) {
-                        $documento = 'CPF: ';
-                    } else {
-                        $documento = 'CNPJ: ';
-                    }
-                } else {
-                    $documento = '';
-                }
-                ?>
-                <?php echo $this->dados->getSacado()->getNome() . ' - ' . $documento . $this->dados->getSacado()->getDocumento() ?>
-            </span>
-            <br>
-            <span>
-                <?php echo $this->dados->getSacado()->getEndereco1() ?>
-            </span>
-            <br>
-            <span>
-                <?php echo $this->dados->getSacado()->getEndereco2() ?>
+                <?php echo $this->dados->getSacado()->getNome() . ' - ' . $this->dados->getSacado()->getDocumento() ?>
             </span>
         </td>
+
+        <td class=ct valign=top width=7 height=15>
+            <img height=15
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
     </tr>
+
     <tr>
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=659 height=1>
+        <td valign=top width=658 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=659 border=0>
+                 width=658 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!--SAC-->
+<!--PAGADOR-->
+
+
+<!--INSTRUÇÕES-->
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
-        <td class=ct valign=top width=7 height=13>
-            <img height=44
+        <td class=ct valign=top width=7 height=15>
+            <img height=15
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=472 height=13>
-            <span class="campo">SAC CAIXA: 0800 726 0101 (informações, reclamações, sugestões e elogios)</span><br>
-            <span class="campo"> Para pessoas com deficiência auditiva ou de fala: 0800 726 2492</span><br>
-            <span class="campo"> Ouvidoria: 0800 725 7474</span><br>
-            <span class="campo"> www.caixa.gov.br</span>
+
+        <td class=ct valign=top colspan=3 width=658 height=15>Instruções (Todas as informações deste bloqueto são de
+            exclusiva responsabilidade do Beneficiário)
+        </td>
+
+        <td class=ct valign=top width=7 height=15>
+            <img height=15
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
         </td>
     </tr>
+
+    <tr>
+        <td class=ct valign=top width=7 height=20>
+            <img height=20
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+
+        <td class=ct valign=top colspan=3 width=658 height=20>
+            <span class="campo">* ESTE BOLETO REPRESENTA DUPLICATA CEDIDA FIDUCIARIAMENTE AO BANCO SAFRA S/A, FICANDO VEDADO O PAGAMENTO DE QUALQUER OUTRA FORMA QUE NÃO ATRAVÉS DO PRESENTE BOLETO.</span><br>
+        </td>
+
+        <td class=ct valign=top width=7 height=20>
+            <img height=20
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
+        </td>
+    </tr>
+
     <tr>
         <td valign=top width=7 height=1>
             <img height=1
@@ -733,45 +468,17 @@
                  width=7 border=0>
         </td>
 
-        <td valign=top width=660 height=1>
+        <td valign=top width=658 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=660 border=0>
+                 width=658 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!--FIM SAC-->
-<table cellspacing=0 cellpadding=0 border=0>
-    <tbody>
-    <tr>
-        <td class=ct width=7 height=12>
-        </td>
-        <td class=ct width=564>Demonstrativo</td>
-        <td class=ct width=7 height=12>
-        </td>
-        <td class=ct width=88>Autenticação mecânica</td>
-    </tr>
-    <tr>
-        <td width=7>
-        </td>
-        <td class=cp width=564>
-                        <span class="campo">
-                            <?php echo $this->dados->getBoleto()->getDemonstrativo1() ?>
-                            <br>
-                            <?php echo $this->dados->getBoleto()->getDemonstrativo2() ?>
-                            <br>
-                            <?php echo $this->dados->getBoleto()->getDemonstrativo3() ?>
-                            <br>
-                        </span>
-        </td>
-        <td width=7>
-        </td>
-        <td width=88>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<!--INSTRUÇÕES-->
+
+
 <table cellspacing=0 cellpadding=0 width=666 border=0>
     <tbody>
     <tr>
@@ -779,25 +486,21 @@
         </td>
         <td width=500 class=cp>
             <br>
-            <br>
-            <br>
         </td>
         <td width=159>
         </td>
     </tr>
     </tbody>
 </table>
+
+
+<!--LINHA PONTILHADA-->
 <table cellspacing=0 cellpadding=0 width=666 border=0>
     <tr>
         <td class=ct width=666>
         </td>
     </tr>
     <tbody>
-    <tr>
-        <td class=ct width=666>
-            <div align=right>Corte na linha pontilhada</div>
-        </td>
-    </tr>
     <tr>
         <td class=ct width=666>
             <img height=1
@@ -808,20 +511,17 @@
     </tbody>
 </table>
 <br>
+<!--LINHA PONTILHADA-->
+
+
 <table cellspacing=0 cellpadding=0 width=666 border=0>
     <tr>
-        <td class=cp width=150>
-                    <span class="campo">
-                        <IMG
-                            src="<?php echo $this->dados->getBanco()->getLogoBanco() ?>" width="150" height="40"
-                            border=0>
-                    </span>
+        <td class=cp width=150 valign="bottom">
+            <span class="campo" style="font: bold 14px Arial;">
+                <?php echo $this->dados->getBanco()->getNomeBanco() ?>
+            </span>
         </td>
-        <td width=3 valign=bottom>
-            <img height=22
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAATAQMAAACA8k5ZAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=2 border=0>
-        </td>
+
         <td class=cpt width=58 valign=bottom>
             <div align=center>
                 <font class=bc>
@@ -866,7 +566,12 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=180 height=13>Vencimento</td>
+
+        <td class=ct valign=top width=178 height=13>Vencimento</td>
+
+        <td class="cp" valign="top" width="7" height="13">
+            <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+        </td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -875,19 +580,24 @@
                  width=1 border=0>
         </td>
         <td class=cp valign=top width=472 height=12>
-            PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE
+            Pagável em qualquer Banco
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=bottom align=right width=180 height=12>
+
+        <td class=cp valign=bottom align=right width=178 height=12>
                         <span class="campo">
                             <?php echo ($this->dados->getBoleto()->getDataVencimento())
                                 ? $this->dados->getBoleto()->getDataVencimento()->format("d/m/Y")
                                 : "Contra Apresentação" ?>
                         </span>
+        </td>
+
+        <td class="cp" valign="top" width="7" height="12">
+            <img height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
         </td>
     </tr>
     <tr>
@@ -906,10 +616,10 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=180 height=1>
+        <td valign=top width=179 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
+                 width=179 border=0>
         </td>
     </tr>
     </tbody>
@@ -923,19 +633,19 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=363 height=13>Beneficiário</td>
+
+        <td class=ct valign=top width=472 height=13>Beneficiário</td>
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=100 height=13>CPF/CNPJ</td>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
+
+        <td class=ct valign=top width=178 height=13>Agência/Código Beneficiário</td>
+
+        <td class="cp" valign="top" width="7" height="13">
+            <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
         </td>
-        <td class=ct valign=top width=180 height=13>Agência/Código Beneficiário</td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -953,20 +663,15 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=100 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getDocumento() ?>
-                        </span>
+
+        <td class=cp valign=top align=right width=178 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getCedente()->getAgencia().' / '.$this->dados->getCedente()->getContaCedente() ?>
+            </span>
         </td>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=180 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getAgenciaCodigo() ?>
-                        </span>
+
+        <td class="cp" valign="top" width="7" height="12">
+            <img height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
         </td>
     </tr>
     <tr>
@@ -978,17 +683,7 @@
         <td valign=top height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=363 border=0>
-        </td>
-        <td valign=top height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top  height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=102 border=0>
+                 width=472 border=0>
         </td>
         <td valign=top height=1>
             <img height=1
@@ -998,12 +693,13 @@
         <td valign=top height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
+                 width=179 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!--ENDEREÇO-->
+
+
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -1012,141 +708,40 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top colspan=3 height=13>Endereço</td>
-
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=7 height=13>UF</td>
-
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=7 height=13>CEP</td>
-    </tr>
-    <tr>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top colspan=3 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getEnderecoFormatado() ?>
-                        </span>
-        </td>
-
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top width=20 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getUf() ?>
-                        </span>
-        </td>
-
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top align=right width=103 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getCedente()->getCep() ?>
-                        </span>
-        </td>
-    </tr>
-    <tr>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=185 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=290 border=0>
-        </td>
-
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=132 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=132 border=0>
-        </td>
-
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=20 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=36 border=0>
-        </td>
-
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=180 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<!-- FIM ENDEREÇO -->
-<table cellspacing=0 cellpadding=0 border=0>
-    <tbody>
-    <tr>
-        <td class=ct valign=top width=7 height=13>
-            <img height=13
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=ct valign=top width=113 height=13>Data do documento</td>
+        <td class=ct valign=top width=113 height=13>Data do Docto</td>
         <td class=ct valign=top width=7 height=13><img height=13
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top width=133 height=13>N&ordm;
+        <td class=ct valign=top align="center" width=133 height=13>N&ordm;
             documento
         </td>
         <td class=ct valign=top width=7 height=13><img height=13
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top width=62 height=13>Espécie doc.</td>
+        <td class=ct valign=top align="center" width=62 height=13> Espécie Docto</td>
         <td class=ct valign=top width=7 height=13><img height=13
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top width=34 height=13>Aceite</td>
+        <td class=ct valign=top align="center" width=34 height=13>Aceite</td>
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=102 height=13>Data processamento</td>
+        <td class=ct valign=top align="center" width=102 height=13>Data Movto</td>
         <td class=ct valign=top width=7 height=13><img height=13
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top width=180 height=13>Nosso número</td>
+
+        <td class=ct valign=top width=178 height=13>Nosso número</td>
+
+        <td class="cp" valign="top" width="7" height="13">
+            <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+        </td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -1154,7 +749,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=113 height=12>
+        <td class=cp valign=top align="center" width=113 height=12>
             <div align=left>
                             <span class="campo">
                                 <?php echo $this->dados->getBoleto()->getDataDocumento()->format("d/m/Y") ?>
@@ -1166,7 +761,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=133 height=12>
+        <td class=cp valign=top align="center" width=133 height=12>
                         <span class="campo">
                             <?php echo $this->dados->getBoleto()->getNumeroDocumento() ?>
                         </span>
@@ -1176,7 +771,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=62 height=12>
+        <td class=cp valign=top align="center" width=62 height=12>
             <div align=left>
                             <span class="campo">
                                 <?php echo $this->dados->getBanco()->getEspecieDoc() ?>
@@ -1188,10 +783,10 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=34 height=12>
+        <td class=cp valign=top align="center" width=34 height=12>
             <div align=left>
                             <span class="campo">
-                                <?php echo $this->dados->getBanco()->getAceite() ?>
+                                <?php echo strtoupper(substr($this->dados->getBanco()->getAceite(), 0,1)) ?>
                             </span>
             </div>
         </td>
@@ -1200,7 +795,7 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=102 height=12>
+        <td class=cp valign=top align="center" width=102 height=12>
             <div align=left>
                             <span class="campo">
                                 <?php echo $this->dados->getBoleto()->getDataProcessamento()->format("d/m/Y") ?>
@@ -1212,10 +807,15 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top align=right width=180 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getBoleto()->getNossoNumeroFormatado() ?>
-                        </span>
+
+        <td class=cp valign=top align=right width=178 height=12>
+            <span class="campo">
+                <?php echo str_pad($this->dados->getBoleto()->getNossoNumero(),9,0,STR_PAD_LEFT) ?>
+            </span>
+        </td>
+
+        <td class="cp" valign="top" width="7" height="12">
+            <img height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
         </td>
     </tr>
     <tr>
@@ -1274,10 +874,10 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=180 height=1>
+        <td valign=top width=179 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
+                 width=179 border=0>
         </td>
     </tr>
     </tbody>
@@ -1289,18 +889,18 @@
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top COLSPAN="3" height=13>Uso do banco</td>
+        <td class=ct valign=top COLSPAN="3" height=13>Data da Oper</td>
         <td class=ct valign=top height=13 width=7><img height=13
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=ct valign=top width=83 height=13>Carteira</td>
+        <td class=ct valign=top align="center" width=70 height=13>Carteira</td>
         <td class=ct valign=top height=13 width=7>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=43 height=13>Espécie</td>
+        <td class=ct valign=top align="center" width=56 height=13>Espécie</td>
         <td class=ct valign=top height=13 width=7>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
@@ -1312,13 +912,18 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=102 height=13>Valor Documento</td>
+        <td class=ct valign=top width=102 height=13>Valor</td>
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=180 height=13>(=) Valor documento</td>
+
+        <td class=ct valign=top width=178 height=13>(=) Valor documento</td>
+
+        <td class="cp" valign="top" width="7" height="13">
+            <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+        </td>
     </tr>
     <tr>
         <td class=cp valign=top width=7 height=12>
@@ -1326,8 +931,9 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td valign=top class=cp height=12 COLSPAN="3">
+        <td valign=top align="center" class=cp height=12 COLSPAN="3">
             <div align=left>
+                <?php echo $this->dados->getBoleto()->getDataProcessamento()->format("d/m/Y") ?>
             </div>
         </td>
         <td class=cp valign=top width=7 height=12>
@@ -1335,23 +941,20 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=83>
-            <div align=left> <span class="campo">
-                                <?php echo $this->dados->getCedente()->getDescricaoCarteira() ?>
-                            </span>
-            </div>
+        <td class=cp valign=top align="center" width=70>
+            <span class="campo">
+                <?php echo $this->dados->getCedente()->getCarteira() ?>
+            </span>
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=43>
-            <div align=left>
-                            <span class="campo">
-                                <?php echo $this->dados->getBanco()->getEspecie() ?>
-                            </span>
-            </div>
+        <td class=cp valign=top align="center" width=56>
+            <span class="campo">
+                <?php echo $this->dados->getBanco()->getEspecie() ?>
+            </span>
         </td>
         <td class=cp valign=top width=7 height=12>
             <img height=12
@@ -1377,10 +980,15 @@
                                                        src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                        width=1 border=0>
         </td>
-        <td class=cp valign=top align=right width=180 height=12>
-                        <span class="campo">
-                            <?php echo number_format($this->dados->getBoleto()->getValor() / 100, 2, ",", ".") ?>
-                        </span>
+
+        <td class=cp valign=top align=right width=178 height=12>
+            <span class="campo">
+                <?php echo number_format($this->dados->getBoleto()->getValor() / 100, 2, ",", ".") ?>
+            </span>
+        </td>
+
+        <td class="cp" valign="top" width="7" height="12">
+            <img height="12" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
         </td>
     </tr>
     <tr>
@@ -1408,20 +1016,20 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=83 height=1>
+        <td valign=top width=70 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=83 border=0>
+                 width=70 border=0>
         </td>
         <td valign=top width=7 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=43 height=1>
+        <td valign=top width=56 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=43 border=0>
+                 width=56 border=0>
         </td>
         <td valign=top width=7 height=1>
             <img height=1
@@ -1448,10 +1056,10 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                  width=7 border=0>
         </td>
-        <td valign=top width=180 height=1>
+        <td valign=top width=179 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
+                 width=179 border=0>
         </td>
     </tr>
     </tbody>
@@ -1470,8 +1078,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
@@ -1486,11 +1094,13 @@
                 </tbody>
             </table>
         </td>
-        <td valign=top width=468 rowspan=5>
-            <font class=ct>Instruções (Texto de responsabilidade do beneficiário)</font>
+
+        <td class="sem-espacamento" valign=top style="width: 100%" rowspan=5>
+            <font class=ct>Instruções (Todas as informações deste bloqueto são de exclusiva responsabilidade do
+                Beneficiário)</font>
             <br>
             <br>
-                        <span class=cp> <FONT class=campo>
+            <span class=cp> <FONT class=campo>
                                 <?php echo $this->dados->getBoleto()->getInstrucoes1(); ?>
                                 <br>
                                 <?php echo $this->dados->getBoleto()->getInstrucoes2(); ?>
@@ -1500,10 +1110,18 @@
                                 <?php echo $this->dados->getBoleto()->getInstrucoes4(); ?>
                             </FONT>
                             <br>
-                            <br> 
                         </span>
+            <br>
+            <span class=ct style="font: bold 12px Arial;">
+                * Carteira vinculada, a quantidade de dias para protesto é automático, sendo padrão o prazo de 10 dias corridos, ou
+exista alguma negociação específica entre a empresa e o Banco, devidamente formalizada.
+                <br>
+                <br>
+                <br>
+            </span>
         </td>
-        <td align=right width=188>
+
+        <td align=right width=178>
             <table cellspacing=0 cellpadding=0 border=0>
                 <tbody>
                 <tr>
@@ -1512,15 +1130,24 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=ct valign=top width=180 height=13>(-) Desconto / Abatimentos</td>
+
+                    <td class=ct valign=top width=178 height=13>(-) Desconto / Abatimentos</td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=cp valign=top align=right width=180 height=12>
+                    <td class=cp valign=top align=right width=178 height=12>
+                    </td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
                     </td>
                 </tr>
                 <tr>
@@ -1529,16 +1156,17 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                              width=7 border=0>
                     </td>
-                    <td valign=top width=180 height=1>
+                    <td valign=top width=178 height=1>
                         <img height=1
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                             width=180 border=0>
+                             width=178 border=0>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </td>
     </tr>
+
     <tr>
         <td align=right width=10>
             <table cellspacing=0 cellpadding=0 border=0 align=left>
@@ -1551,8 +1179,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
@@ -1576,14 +1204,24 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=ct valign=top width=180 height=13>(-) Outras deduções</td>
+
+                    <td class=ct valign=top width=178 height=13>(-) Outras deduções</td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12><img height=12
+                    <td class=cp valign=top width=7 height=13><img height=13
                                                                    src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                                                                    width=1 border=0>
                     </td>
-                    <td class=cp valign=top align=right width=180 height=12>
+
+                    <td class=cp valign=top align=right width=178 height=12>
+                    </td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
                     </td>
                 </tr>
                 <tr>
@@ -1592,10 +1230,10 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                              width=7 border=0>
                     </td>
-                    <td valign=top width=180 height=1>
+                    <td valign=top width=178 height=1>
                         <img height=1
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                             width=180 border=0>
+                             width=178 border=0>
                     </td>
                 </tr>
                 </tbody>
@@ -1614,8 +1252,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
@@ -1639,15 +1277,25 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=ct valign=top width=180 height=13>(+) Mora / Multa</td>
+                    <td class=ct valign=top width=178 height=13>(+) Mora / Multa</td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
+
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=cp valign=top align=right width=180 height=12>
+
+                    <td class=cp valign=top align=right width=178 height=12>
+                    </td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
                     </td>
                 </tr>
                 <tr>
@@ -1655,10 +1303,10 @@
                                                          src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                                                          width=7 border=0>
                     </td>
-                    <td valign=top width=180 height=1>
+                    <td valign=top width=178 height=1>
                         <img height=1
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                             width=180 border=0>
+                             width=178 border=0>
                     </td>
                 </tr>
                 </tbody>
@@ -1677,8 +1325,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
@@ -1693,6 +1341,7 @@
                 </tbody>
             </table>
         </td>
+
         <td align=right width=188>
             <table cellspacing=0 cellpadding=0 border=0>
                 <tbody>
@@ -1702,15 +1351,25 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=ct valign=top width=180 height=13>(+) Outros acréscimos</td>
+
+                    <td class=ct valign=top width=178 height=13>(+) Outros acréscimos</td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=cp valign=top align=right width=180 height=12>
+
+                    <td class=cp valign=top align=right width=178 height=12>
+                    </td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
                     </td>
                 </tr>
                 <tr>
@@ -1719,16 +1378,17 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                              width=7 border=0>
                     </td>
-                    <td valign=top width=180 height=1>
+                    <td valign=top width=178 height=1>
                         <img height=1
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                             width=180 border=0>
+                             width=178 border=0>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </td>
     </tr>
+
     <tr>
         <td align=right width=10>
             <table cellspacing=0 cellpadding=0 border=0 align=left>
@@ -1741,15 +1401,23 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                             width=1 border=0>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign=top width=7 height=1>
+                        <img height=1
+                             src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
                              width=1 border=0>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </td>
+
         <td align=right width=188>
             <table cellspacing=0 cellpadding=0 border=0>
                 <tbody>
@@ -1759,21 +1427,42 @@
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=ct valign=top width=180 height=13>(=) Valor cobrado</td>
+
+                    <td class=ct valign=top width=178 height=13>(=) Valor cobrado</td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
                 </tr>
                 <tr>
-                    <td class=cp valign=top width=7 height=12>
-                        <img height=12
+                    <td class=cp valign=top width=7 height=13>
+                        <img height=13
                              src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                              width=1 border=0>
                     </td>
-                    <td class=cp valign=top align=right width=180 height=12>
+
+                    <td class=cp valign=top align=right width=178 height=12>
+                    </td>
+
+                    <td class="cp" valign="top" width="7" height="13">
+                        <img height="13" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC" width="1" border="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td valign=top width=7 height=1>
+                        <img height=1
+                             width=7 border=0>
+                    </td>
+                    <td valign=top width=178 height=1>
+                        <img height=1
+                             width=178 border=0>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </td>
     </tr>
+
     </tbody>
 </table>
 <table cellspacing=0 cellpadding=0 width=666 border=0>
@@ -1787,6 +1476,8 @@
     </tr>
     </tbody>
 </table>
+
+<!--PAGADOR-->
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -1795,34 +1486,26 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=ct valign=top width=659 height=13>Pagador</td>
-    </tr>
-    <tr>
-        <td class=cp valign=top width=7 height=12>
-            <img height=12
+        <td class=ct valign=top width=100 height=13>Pagador</td>
+
+        <td class=cp valign=top width=558 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getSacado()->getNome() . ' - ' . $this->dados->getSacado()->getDocumento() ?>
+            </span>
+        </td>
+
+        <td class=ct valign=top width=7 height=13>
+            <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
-        </td>
-        <td class=cp valign=top width=659 height=12>
-                        <span class="campo">
-                            <?php
-                            if ($this->dados->getSacado()->getDocumento()) {
-                                $l = preg_replace("/[^\d]/", "", $this->dados->getSacado()->getDocumento());
-                                if (strlen($l) == 11) {
-                                    $documento = 'CPF: ';
-                                } else {
-                                    $documento = 'CNPJ: ';
-                                }
-                            } else {
-                                $documento = '';
-                            }
-                            ?>
-                            <?php echo $this->dados->getSacado()->getNome() . ' - ' . $documento . $this->dados->getSacado()->getDocumento() ?>
-                        </span>
         </td>
     </tr>
     </tbody>
 </table>
+<!--PAGADOR-->
+
+
+<!--ENDEREÇO-->
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -1831,14 +1514,27 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=659 height=12>
-                        <span class="campo">
-                            <?php echo $this->dados->getSacado()->getEndereco1() ?>
-                        </span>
+
+        <td class=ct valign=top width=100 height=13>Endereço</td>
+
+        <td class=cp valign=top width=558 height=12>
+            <span class="campo">
+                <?php echo $this->dados->getSacado()->getEndereco1() .' - '. $this->dados->getSacado()->getEndereco2() ?>
+            </span>
+        </td>
+
+        <td class=ct valign=top width=7 height=13>
+            <img height=13
+                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
+                 width=1 border=0>
         </td>
     </tr>
     </tbody>
 </table>
+<!--ENDEREÇO-->
+
+
+<!--SACADOR-->
 <table cellspacing=0 cellpadding=0 border=0>
     <tbody>
     <tr>
@@ -1847,56 +1543,13 @@
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
         </td>
-        <td class=cp valign=top width=472 height=13>
-                        <span class="campo">
-                            <?php echo $this->dados->getSacado()->getEndereco2() ?>
-                        </span>
-        </td>
+
+        <td class=ct width=658>Sacador/Avalista</td>
+
         <td class=ct valign=top width=7 height=13>
             <img height=13
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
                  width=1 border=0>
-        </td>
-        <td class=ct valign=top width=180 height=13>Cód. baixa</td>
-    </tr>
-    <tr>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=472 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=472 border=0>
-        </td>
-        <td valign=top width=7 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=7 border=0>
-        </td>
-        <td valign=top width=180 height=1>
-            <img height=1
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=180 border=0>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<!--SAC-->
-<table cellspacing=0 cellpadding=0 border=0>
-    <tbody>
-    <tr>
-        <td class=ct valign=top width=7 height=13>
-            <img height=44
-                 src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAATAQMAAABrxfVaAAAAA1BMVEUAAACnej3aAAAADElEQVR42mNgIAYAAAAmAAEy2MJFAAAAAElFTkSuQmCC
-                 width=1 border=0>
-        </td>
-        <td class=cp valign=top width=472 height=13>
-            <span class="campo">SAC CAIXA: 0800 726 0101 (informações, reclamações, sugestões e elogios)</span><br>
-            <span class="campo"> Para pessoas com deficiência auditiva ou de fala: 0800 726 2492</span><br>
-            <span class="campo"> Ouvidoria: 0800 725 7474</span><br>
-            <span class="campo"> www.caixa.gov.br</span>
         </td>
     </tr>
     <tr>
@@ -1906,60 +1559,41 @@
                  width=7 border=0>
         </td>
 
-        <td valign=top width=660 height=1>
+        <td valign=top width=658 height=1>
             <img height=1
                  src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg==
-                 width=660 border=0>
+                 width=658 border=0>
         </td>
     </tr>
     </tbody>
 </table>
-<!--FIM SAC-->
-<TABLE cellSpacing=0 cellPadding=0 border=0 width=666>
-    <tbody>
-    <tr>
-        <td class=ct width=7 height=12>
-        </td>
-        <td class=ct width=409>Sacador/Avalista</td>
-        <td class=ct width=250>
-            <div align=right>Autenticação mecânica - <b class=cp>Ficha de Compensação</b>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td class=ct colspan=3>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<!--SACADOR-->
+
+
+<!--CÓDIGO DE BARRAS-->
 <TABLE cellSpacing=0 cellPadding=0 width=666 border=0>
     <tbody>
     <tr>
-        <td vAlign=bottom align=left height=50>
+        <td class=ct valign=top width=7 height=55>
+        </td>
+
+        <td vAlign=bottom align=left width="472" height=50>
             <img src="<?php echo $this->dados->getBoleto()->getCodigoDeBarras()->render(); ?>"/>
         </td>
-    </tr>
-    </tbody>
-</table>
-<table cellSpacing=0 cellPadding=0 width=666 border=0>
-    <tr>
-        <td class=ct width=666>
-        </td>
-    </tr>
-    <tbody>
-    <tr>
-        <td class=ct width=666>
-            <div align=right>Corte na linha pontilhada</div>
-        </td>
-    </tr>
-    <tr>
-        <td class=ct width=666>
-            <img height=1
-                 src=data:ïmage/png;base64,iVBORw0KGgoAAAANSUhEUgAAApkAAAACAQAAAAA76vpWAAAAGUlEQVR42mNgbDiQYCDBw8ZMPUYDAy0MBQCvGyXfT4/GUQAAAABJRU5ErkJggg==
-                 width=665 border=0>
+
+        <td class=ct valign=center align="center" width=180 height=13 style="FONT: 9px Arial Narrow";">
+            Autenticação Mecânica
+            <br>
+            <img height="1"
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVR42mNgAAAAAgAB5Sfe/AAAAABJRU5ErkJggg=="
+                 width="180" border="0">
+            <br>
+            <span style="FONT: bold 9px Arial Narrow";">FICHA DE COMPENSAÇÃO</span>
         </td>
     </tr>
     </tbody>
 </table>
+<!--CÓDIGO DE BARRAS-->
+
 </body>
 </html>

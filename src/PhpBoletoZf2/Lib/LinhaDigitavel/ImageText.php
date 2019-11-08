@@ -1,21 +1,21 @@
 <?php
 
 /**
- * PHP Boleto ZF2 - Versão Beta 
- * 
+ * PHP Boleto ZF2 - Versão Beta
+ *
  * Este arquivo está disponível sob a Licença GPL disponível pela Web
- * em http://pt.wikipedia.org/wiki/GNU_General_Public_License 
+ * em http://pt.wikipedia.org/wiki/GNU_General_Public_License
  * Você deve ter recebido uma cópia da GNU Public License junto com
- * este pacote; se não, escreva para: 
- * 
+ * este pacote; se não, escreva para:
+ *
  * Free Software Foundation, Inc.
  * 59 Temple Place - Suite 330
  * Boston, MA 02111-1307, USA.
- * 
- * Originado do Projeto BoletoPhp: http://www.boletophp.com.br 
- * 
+ *
+ * Originado do Projeto BoletoPhp: http://www.boletophp.com.br
+ *
  * Adaptação ao Zend Framework 2: João G. Zanon Jr. <jot@jot.com.br>
- * 
+ *
  */
 
 namespace PhpBoletoZf2\Lib\LinhaDigitavel;
@@ -26,6 +26,7 @@ class ImageText
 {
 
     protected $width = 450;
+    protected $fontSize = 11;
     protected $height = 30;
     protected $format = 'image/png';
     protected $text;
@@ -83,7 +84,10 @@ class ImageText
         /**
          * Escrevendo o texto
          */
-        imagettftext($this->image, 11, 0, 5, $this->getHeight()-5, $this->colors['black'], $this->getFont(), $this->getText());
+        $dimensions = imagettfbbox($this->getFontSize(), 0, $this->getFont(), $this->getText());
+        $textWidth = abs($dimensions[4] - $dimensions[0]);
+        $x = imagesx($this->image) - $textWidth;
+        imagettftext($this->image, 11, 0, $x, $this->getHeight()-5, $this->colors['black'], $this->getFont(), $this->getText());
 
         /**
          * Gerando a imagem
@@ -159,6 +163,25 @@ class ImageText
     public function setFont($font)
     {
         $this->font = $font;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFontSize()
+    {
+        return $this->fontSize;
+    }
+
+    /**
+     * @param int $fontSize
+     * @return ImageText
+     */
+    public function setFontSize($fontSize)
+    {
+        $this->fontSize = $fontSize;
+
         return $this;
     }
 

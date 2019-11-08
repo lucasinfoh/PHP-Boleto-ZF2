@@ -58,39 +58,33 @@ abstract class Util
      * 
      * @return int $dv valor digito verificador 
      */
-    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr) 
+    public static function digitoVerificadorNossoNumeroBancoob($sequencia, $constanteStr)
     {
-        $cont      = 0;
-        $calculoDv = '';
+        $tamanho = strlen($sequencia);
+        /* Constante fixa para Cálculo*/
+        $constanteStr = '319731973197319731973';
 
-        for ($num = 0; $num<=strlen($sequencia); $num++) {
-            for ($posConst=0;$posConst<strlen($constanteStr);$posConst++) {
-                if ($cont==$posConst) {
-                    $constante = $constanteStr[$posConst];
+        $arrSequencia = str_split($sequencia);
+        $arrConstante = str_split($constanteStr);
+        $soma         = 0;
+        $resto        = 0;
 
-                    if ($cont==strlen($constanteStr)-1) {
-                        $cont=0;
-                    } else {                
-                        $cont++;
-                    }    
-                    
-                    break;
-                }
-            }
+        $digitoVerificador = null;
 
-            $calculoDv = $calculoDv + (substr($sequencia,$num,1) * $constante);
+        for ($x = 0; $x <= $tamanho; $x++) {
+            $soma += ((int)$arrSequencia[$x] * (int)$arrConstante[$x]);
         }
 
-        $resto = $calculoDv % 11;
-        $dv   = 11 - $resto;
+        $resto = $soma % 11;
 
-        if ($dv == 0) $dv = 0;
-        if ($dv == 1) $dv = 0;
-        if ($dv > 9) $dv = 0;
+        if ($resto == 0 || $resto == 1) {
+            $digitoVerificador = 0;
+        } else {
+            $digitoVerificador = 11 - $resto;
+        }
 
-        return $dv;
+        return $digitoVerificador;
     }
-
     /**
      * Gera o dígito verificador do código de barras
      * @param int $numero
@@ -220,15 +214,18 @@ abstract class Util
     {
         $soma = 0;
         $fator = 2;
+
         for ($i = strlen($num); $i > 0; $i--) {
             $numeros[$i] = substr($num, $i - 1, 1);
             $parcial[$i] = $numeros[$i] * $fator;
             $soma += $parcial[$i];
+
             if ($fator == $base) {
                 $fator = 1;
             }
             $fator++;
         }
+
         if ($r == 0) {
             $soma *= 10;
             $digito = $soma % 11;
@@ -246,6 +243,7 @@ abstract class Util
         } elseif ($r == 2) {
         	$resto = $soma % 11;
         	$res = 11-$resto;
+
         	if (in_array($res,array(0,10,11)))
         		$res = 1;
         	return $res;

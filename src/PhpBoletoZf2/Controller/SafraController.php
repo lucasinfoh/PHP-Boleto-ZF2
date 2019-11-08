@@ -23,11 +23,10 @@ namespace PhpBoletoZf2\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DOMPDFModule\View\Model\PdfModel;
-use PhpBoletoZf2\Model\BoletoBB;
-use PhpBoletoZf2\Model\Banco;
+use PhpBoletoZf2\Model\BoletoSafra;
 use PhpBoletoZf2\Model\Sacado;
 
-class BBController extends AbstractActionController
+class SafraController extends AbstractActionController
 {
 
     public function indexAction()
@@ -47,15 +46,15 @@ class BBController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                $boleto = new BoletoBB($data);
+                $boleto = new BoletoSafra($data);
                 $sacado = new Sacado($data);
 
-                $bb = $this->getServiceLocator()
-                        ->get('Boleto\BB');
-                $bb->setSacado($sacado)
+                $safra = $this->getServiceLocator()
+                        ->get('Boleto\Safra');
+                $safra->setSacado($sacado)
                         ->setBoleto($boleto);
 
-                $dados = $bb->prepare();
+                $dados = $safra->prepare();
             }
         }
 
@@ -66,7 +65,7 @@ class BBController extends AbstractActionController
                 break;
             case 'pdf' :
                 $pdf = new PdfModel();
-                $pdf->setOption('filename', 'boleto-bb');
+                $pdf->setOption('filename', 'boleto-safra');
                 $pdf->setOption('enable_remote', true);
                 $pdf->setOption('paperSize', 'a4'); // Defaults to "8x11" 
                 $pdf->setVariables(array('boleto' => $boleto));
