@@ -130,7 +130,7 @@
 
         <td class=cp valign=top align="center" width=160 height=12>
             <span class="campo">
-                <?php echo $this->dados->getBoleto()->getNossoNumeroFormatado() ?>
+                <?php echo $this->dados->getBoleto()->getNossoNumero() ?>
             </span>
         </td>
         <td class=cp valign=top width=7 height=12>
@@ -274,7 +274,7 @@
 
         <td class=cp valign=top align="center" width=100 height=12>
             <span class="campo">
-                <?php echo $this->dados->getCedente()->getDescricaoCarteira() ?>
+                <?php echo $this->dados->getCedente()->getCarteira() ?>
             </span>
         </td>
 
@@ -286,7 +286,7 @@
 
         <td class=cp valign=top align=center width=160 height=12>
             <span class="campo">
-                <?php echo $this->dados->getCedente()->getAgenciaCodigo() ?>
+                <?php echo $this->dados->getCedente()->getAgencia().' / '.$this->dados->getCedente()->getContaCedente() ?>
             </span>
         </td>
 
@@ -666,7 +666,7 @@
 
         <td class=cp valign=top align=right width=178 height=12>
             <span class="campo">
-                <?php echo $this->dados->getCedente()->getAgenciaCodigo() ?>
+                <?php echo $this->dados->getCedente()->getAgencia().' / '.$this->dados->getCedente()->getContaCedente() ?>
             </span>
         </td>
 
@@ -786,7 +786,7 @@
         <td class=cp valign=top align="center" width=34 height=12>
             <div align=left>
                             <span class="campo">
-                                <?php echo $this->dados->getBanco()->getAceite() ?>
+                                <?php echo strtoupper(substr($this->dados->getBanco()->getAceite(), 0,1)) ?>
                             </span>
             </div>
         </td>
@@ -810,7 +810,7 @@
 
         <td class=cp valign=top align=right width=178 height=12>
             <span class="campo">
-                <?php echo $this->dados->getBoleto()->getNossoNumeroFormatado() ?>
+                <?php echo $this->dados->getBoleto()->getNossoNumero() ?>
             </span>
         </td>
 
@@ -943,7 +943,7 @@
         </td>
         <td class=cp valign=top align="center" width=70>
             <span class="campo">
-                <?php echo $this->dados->getCedente()->getDescricaoCarteira() ?>
+                <?php echo $this->dados->getCedente()->getCarteira() ?>
             </span>
         </td>
         <td class=cp valign=top width=7 height=12>
