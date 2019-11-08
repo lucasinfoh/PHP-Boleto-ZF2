@@ -130,7 +130,7 @@
 
         <td class=cp valign=top align="center" width=160 height=12>
             <span class="campo">
-                <?php echo $this->dados->getBoleto()->getNossoNumero() ?>
+                <?php echo str_pad($this->dados->getBoleto()->getNossoNumero(),9,0,STR_PAD_LEFT) ?>
             </span>
         </td>
         <td class=cp valign=top width=7 height=12>
@@ -810,7 +810,7 @@
 
         <td class=cp valign=top align=right width=178 height=12>
             <span class="campo">
-                <?php echo $this->dados->getBoleto()->getNossoNumero() ?>
+                <?php echo str_pad($this->dados->getBoleto()->getNossoNumero(),9,0,STR_PAD_LEFT) ?>
             </span>
         </td>
 
