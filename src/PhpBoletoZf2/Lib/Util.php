@@ -345,4 +345,32 @@ abstract class Util
 
     }
 
+    public static function calculoDVSafra($num)
+    {
+        $fator = 2;
+
+        for ($i = strlen($num); $i > 0; $i--) {
+            $numeros[$i] = substr($num, $i - 1, 1);
+            $parcial[$i] = $numeros[$i] * $fator;
+
+            //se o número for maior que 9 deve somar as casas seperadamente
+            $soma += ($parcial[$i] > 9 ? ($parcial[$i] - 9) : $parcial[$i]);
+
+            if ($fator == 1) {
+                $fator = 3;
+            }
+            $fator--;
+        }
+
+        $dv = $soma % 10;
+
+        if($dv==0){
+            return 0;
+        }
+
+        $dv = 10 - $dv;
+
+        return $dv;
+    }
+
 }
