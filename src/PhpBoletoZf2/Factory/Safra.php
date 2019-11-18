@@ -102,20 +102,17 @@ class Safra extends
         ) == 'P' ? 0 : Util::digitoVerificadorNossoNumero($nossoNumeroFormatado);
         $nossoNumeroFormatado = $nossoNumeroFormatado . '-' . $digitoNossoNumero;
 
+        $agencia = str_pad((substr($this->getCedente()->getAgencia(), 0, 4)), 4, '0', STR_PAD_LEFT);
 
         $agenciaCodigo = (
-            $this->getCedente()->getAgencia() . ' / ' .
+            substr($this->getCedente()->getAgencia(),0,5) . ' / ' .
             $this->getCedente()->getContaCedente() . '-' . $contaCedenteDv
         );
 
         //Bloco1
-        $strParte1 =
-            $this->getBanco()->getCodigoBanco()
-            . $this->getBanco()->getMoeda() . '7' .
-            str_pad(($this->getCedente()->getAgencia() * 1), 4, '0', STR_PAD_LEFT);
+        $strParte1 = $this->getBanco()->getCodigoBanco() . $this->getBanco()->getMoeda() . '7' . $agencia;
 
-        $dv_01 = Util::modulo10($strInicioLinha * 1);
-        $strCalcDac = $strParte1;
+        $dv_01 = Util::calculoDVSafra($strParte1);
         $strParte1 .= $dv_01;
 
         //Bloco2
@@ -123,17 +120,22 @@ class Safra extends
             (substr($this->getCedente()->getAgencia(), -1)) .
             str_pad($this->getCedente()->getContaCorrente(), 9, '0', STR_PAD_LEFT);
 
-        $dv_02 = Util::modulo10($strParte2 * 2);
-        $strCalcDac .= $strParte2;
+        $dv_02 = Util::calculoDVSafra($strParte2);
         $strParte2 .= $dv_02;
 
         //Bloco3
-        $strParte3 = str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT) .
-            '2';//tipo cobrança
-        $dv_03 = Util::modulo10($strParte3 * 1);
-        $strCalcDac .= $strParte3;
+        $strParte3 = str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT) . '2';//tipo cobrança
+        $dv_03 = Util::calculoDVSafra($strParte3);
         $strParte3 .= $dv_03;
 
+        $strCalcDac = (
+            $strParte1 .
+            $strParte2 .'7'.
+            $strParte3 .
+            $fatorVencimento .
+            $valorProcessado);
+
+        $strCalcDac = substr($strCalcDac, 0, 4) . substr($strCalcDac, 5, 39);
         $dac = Util::calculoDac($strCalcDac);
 
         $strLinha = (
@@ -152,8 +154,8 @@ class Safra extends
             $fatorVencimento .
             $valorProcessado .
             '7' .
-            str_pad(($this->getCedente()->getAgencia() * 1), 4, '0', STR_PAD_LEFT) .
-            (substr($this->getCedente()->getAgencia(), -1)) .
+            $agencia .
+            (substr($agencia, -1)) .
             str_pad($this->getCedente()->getContaCorrente(), 9, '0', STR_PAD_LEFT) .
             str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT) .
             '2'
