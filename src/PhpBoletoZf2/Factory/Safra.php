@@ -69,7 +69,7 @@ class Safra extends
         /**
          * Calcula o fator do vencimento (número inteiro que representa a data de vencimento na linha digitavel)
          */
-        $fatorVencimento = Util::fatorVencimento($this->getBoleto()->getDataVencimento()->format("d/m/Y"));
+        $fatorVencimento = (Util::fatorVencimento($this->getBoleto()->getDataVencimento()->format("d/m/Y"))) * 1;
 
         /**
          * Processando o valor para aplicação na linha digitável e no código de barras
@@ -129,14 +129,18 @@ class Safra extends
         $strParte3 .= $dv_03;
 
         $strCalcDac = (
-            $strParte1 .
-            $strParte2 .'7'.
-            $strParte3 .
+            $this->getBanco()->getCodigoBanco() .
+            $this->getBanco()->getMoeda() .
             $fatorVencimento .
-            $valorProcessado);
+            $valorProcessado .
+            '7' .
+            (str_pad((substr($this->getCedente()->getAgencia(), 0, 5)), 5, '0', STR_PAD_LEFT)) .
+            str_pad($this->getCedente()->getContaCorrente(), 8, '0', STR_PAD_LEFT) .
+            str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT) . '2'
+        );
 
-        $strCalcDac = substr($strCalcDac, 0, 4) . substr($strCalcDac, 5, 39);
         $dac = Util::calculoDac($strCalcDac);
+        //$dacTeste = Util::calculoDac('4229807300000010007025000020264030000010542'); Teste
 
         $strLinha = (
             $strParte1 .
@@ -148,17 +152,7 @@ class Safra extends
         );
 
         $strCodigoBarras = (
-            $this->getBanco()->getCodigoBanco() .
-            $this->getBanco()->getMoeda() .
-            $dac .
-            $fatorVencimento .
-            $valorProcessado .
-            '7' .
-            $agencia .
-            (substr($agencia, -1)) .
-            str_pad($this->getCedente()->getContaCorrente(), 9, '0', STR_PAD_LEFT) .
-            str_pad($this->getBoleto()->getNossoNumero(), 9, '0', STR_PAD_LEFT) .
-            '2'
+            substr($strCalcDac,0,4).$dac.substr($strCalcDac,4)
         );
 
 

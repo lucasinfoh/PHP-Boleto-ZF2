@@ -354,7 +354,11 @@ abstract class Util
             $parcial[$i] = $numeros[$i] * $fator;
 
             //se o número for maior que 9 deve somar as casas seperadamente
-            $soma += ($parcial[$i] > 9 ? ($parcial[$i] - 9) : $parcial[$i]);
+            if ($parcial[$i] > 0){
+                $parcial[$i] = substr($parcial[$i], 0, 1) + substr($parcial[$i], 1, 1);
+            }
+
+            $soma += $parcial[$i];
 
             if ($fator == 1) {
                 $fator = 3;
