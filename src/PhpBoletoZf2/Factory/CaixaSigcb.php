@@ -92,8 +92,10 @@ class CaixaSigcb extends AbstractBoletoFactory
         preg_match('/(\d{3})(\d{3})(\d{9})/', $strNossoNumeroProcessado, $arrNossoNumeroProcessado);
         $strCarteira = $this->getCedente()->getCarteira();
 
+        str_pad(($this->getCedente()->getContaCedente()*1),6,0,STR_PAD_LEFT);
+
         $campoLivre = (
-            $this->getCedente()->getContaCedente() .
+            str_pad(($this->getCedente()->getContaCedente()*1),6,0,STR_PAD_LEFT) .
             $this->getCedente()->getContaCedenteDv() .
             $arrNossoNumeroProcessado[1] .
             ($strCarteira[0] ? $strCarteira[0] : '2') .
@@ -150,8 +152,8 @@ class CaixaSigcb extends AbstractBoletoFactory
         /**
          * Iniciando opções para criação do Código de Barras
          */
-        $barcodeOptions = array('text' => $strLinha);
 
+        $barcodeOptions = array('text' => $strLinha);
         /**
          * Criando o código de barras em uma imagem e retornando seu base64
          */
