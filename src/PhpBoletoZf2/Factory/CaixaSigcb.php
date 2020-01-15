@@ -141,7 +141,7 @@ class CaixaSigcb extends AbstractBoletoFactory
         $contaCedenteDv = $contaCedenteDv > 9 || $contaCedenteDv == "P" ? 0 : $contaCedenteDv;
 
         $agenciaCodigo = (
-            $this->getCedente()->getAgencia() . ' / ' .
+            $this->getCedente()->getAgencia() . '/' .
             str_pad(($this->getCedente()->getContaCedente()*1),6,0,STR_PAD_LEFT) . '-' . $contaCedenteDv
         );
  
